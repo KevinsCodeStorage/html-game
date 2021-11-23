@@ -1,0 +1,20 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "dealer dealer dealer"
+      "playerHand playerHand playerHand"
+      "bets playerControls playerControls";
+  }
+  
+  .dealer { grid-area: dealer; }
+  
+  .playerHand { grid-area: playerHand; }
+  
+  .bets { grid-area: bets; }
+  
+  .playerControls { grid-area: playerControls; }
+  
