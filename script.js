@@ -14,5 +14,46 @@ let deck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
 ]
 
 
-Math.floor(Math.random()*gameDeck.length)
-`/assets/${value}.png`
+function draw(hand, aceCount, player){
+    let value = deck[Math.floor(Math.random()*deck.length)]
+    console.log(`/assests/${value}.png`)
+
+
+    var img = document.createElement("img");
+    img.src = `assests/${value}.png`
+    img.style.height = '300px';
+    img.style.width = '200px';
+
+    document.getElementById('playerHand').append(img)
+
+
+    let cardFace = getValue(value)
+    console.log(cardFace)
+
+
+    let cardValue
+    if(cardFace === 'king' || cardFace === 'queen'|| cardFace === 'jack'){
+        cardValue = 10
+    }
+    else if(cardFace === 'ace'){
+        cardValue = 11
+        aceCount++
+    }
+    else{
+        cardValue = parseInt(cardFace)
+    }
+    console.log(cardValue)
+
+
+    return aceCount
+    
+}
+
+draw()
+draw()
+
+function getValue(value){
+    var card = value.match('^([^_]+)')
+    return card[0]
+}
+
