@@ -14,9 +14,9 @@ let deck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
 ]
 
 
-function draw(hand, aceCount, player){
+function draw(player){
     let value = deck[Math.floor(Math.random()*deck.length)]
-    console.log(`/assests/${value}.png`)
+    //console.log(`/assests/${value}.png`)
 
 
     var img = document.createElement("img");
@@ -24,11 +24,11 @@ function draw(hand, aceCount, player){
     img.style.height = '300px';
     img.style.width = '200px';
 
-    document.getElementById('playerHand').append(img)
+    document.getElementById(`${player}Hand`).append(img)
 
 
     let cardFace = getValue(value)
-    console.log(cardFace)
+    //console.log(cardFace)
 
 
     let cardValue
@@ -37,20 +37,57 @@ function draw(hand, aceCount, player){
     }
     else if(cardFace === 'ace'){
         cardValue = 11
-        aceCount++
+        //aceCount++
     }
     else{
         cardValue = parseInt(cardFace)
     }
-    console.log(cardValue)
+    //console.log(cardValue)
 
 
-    return aceCount
+    return cardValue
     
 }
 
-draw()
-draw()
+
+function newGame(){
+    
+    //let gameDeck = deck
+    //let playerHand = 0
+    let dealerHand = 0
+
+    while (dealerHand < 16){
+        dealerHand += draw("dealer")
+    }
+    console.log(dealerHand)
+
+
+
+}
+
+document.getElementById('draw').addEventListener('click', function(e){
+    draw("player")
+});
+
+
+
+function MaxAmount(hand, aceCount){
+
+    if(hand > 21 && aceCount > 0){
+        --aceCount;
+        hand = hand-10;
+        MaxAmount(hand, aceCount)
+    }
+    else if(hand > 21){
+        //you lose
+    }
+    else if(hand === 21){
+        //you cant draw
+    }
+    else{
+        //can still draw
+    }
+}
 
 function getValue(value){
     var card = value.match('^([^_]+)')
