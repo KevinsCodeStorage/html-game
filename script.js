@@ -1,3 +1,8 @@
+window.onbeforeunload = function() {
+    return "Data will be lost if you leave the page, are you sure?";
+};
+
+
 let deck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
             '3_of_clubs','3_of_diamonds','3_of_hearts','3_of_spades',
             '4_of_clubs','4_of_diamonds','4_of_hearts','4_of_spades',
