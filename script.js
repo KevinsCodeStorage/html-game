@@ -3,7 +3,7 @@ window.onbeforeunload = function() {
 };
 
 
-let deck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
+let startDeck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
             '3_of_clubs','3_of_diamonds','3_of_hearts','3_of_spades',
             '4_of_clubs','4_of_diamonds','4_of_hearts','4_of_spades',
             '5_of_clubs','5_of_diamonds','5_of_hearts','5_of_spades',
@@ -17,12 +17,16 @@ let deck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
             'queen_of_clubs2','queen_of_diamonds2','queen_of_hearts2','queen_of_spades2',
             'king_of_clubs2','king_of_diamonds2','king_of_hearts2','king_of_spades2'
 ]
+let deck = startDeck
 
+function fillDeck(){
+    let deck = startDeck;
+}
 
 function draw(player){
-    let value = deck[Math.floor(Math.random()*deck.length)]
+    let value = deck.splice(Math.floor(Math.random()*deck.length), 1)
     //console.log(`/assests/${value}.png`)
-
+    console.log(deck.length)
 
     var img = document.createElement("img");
     img.src = `assests/${value}.png`
@@ -32,7 +36,7 @@ function draw(player){
     document.getElementById(`${player}Hand`).append(img)
 
 
-    let cardFace = getValue(value)
+    let cardFace = getValue(`${value}`)
     //console.log(cardFace)
 
 
