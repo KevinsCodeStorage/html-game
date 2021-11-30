@@ -1,6 +1,6 @@
-window.onbeforeunload = function() {
-    return "Data will be lost if you leave the page, are you sure?";
-};
+//window.onbeforeunload = function() {
+//    return "Data will be lost if you leave the page, are you sure?";
+//};
 
 
 let startDeck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
@@ -17,16 +17,21 @@ let startDeck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
             'queen_of_clubs2','queen_of_diamonds2','queen_of_hearts2','queen_of_spades2',
             'king_of_clubs2','king_of_diamonds2','king_of_hearts2','king_of_spades2'
 ]
-let deck = startDeck
+var deck = JSON.parse(JSON.stringify(startDeck))
+
+
+let dealerHand
+let playerHand
+
 
 function fillDeck(){
-    let deck = startDeck;
+    deck = JSON.parse(JSON.stringify(startDeck));
 }
 
 function draw(player){
     let value = deck.splice(Math.floor(Math.random()*deck.length), 1)
     //console.log(`/assests/${value}.png`)
-    console.log(deck.length)
+    //console.log(deck.length)
 
     var img = document.createElement("img");
     img.src = `assests/${value}.png`
@@ -58,46 +63,67 @@ function draw(player){
     
 }
 
-
+//start a game
 function newGame(){
-    
-    //let gameDeck = deck
-    //let playerHand = 0
-    let dealerHand = 0
+    //code to append card back goes here
 
+    dealerHand = draw("dealer")
+    playerHand = draw("player")
+    playerHand += draw("player")
+}
+
+
+
+function stand(dealerHand){
+    
+    //code to remove card back goes here
     while (dealerHand < 16){
         dealerHand += draw("dealer")
+        if(dealerHand > 21){
+            //acecheck here
+        }
     }
     console.log(dealerHand)
 
+    if(dealerHand > 21 || playerHand > dealerHand){
+        console.log('Player Wins')
+    }
+    else{
+        console.log('Dealer Wins')
+    }
 
 
 }
 
+
+//adds functionality to buttons
 document.getElementById('draw').addEventListener('click', function(e){
-    draw("player")
+    playerHand += draw("player")
+    if(playerHand > 21){
+        //acecheck here
+        if(playerHand > 21){
+            console.log('Dealer Wins')
+        }
+    }
+});
+document.getElementById('stand').addEventListener('click', function(e){
+    stand(dealerHand)
 });
 
 
+//protocode
+function aceValue(hand, aceCount){
 
-function MaxAmount(hand, aceCount){
-
-    if(hand > 21 && aceCount > 0){
+    while(hand > 21 && aceCount > 0){
         --aceCount;
         hand = hand-10;
-        MaxAmount(hand, aceCount)
+        
     }
-    else if(hand > 21){
-        //you lose
-    }
-    else if(hand === 21){
-        //you cant draw
-    }
-    else{
-        //can still draw
-    }
+    return hand
 }
 
+
+//gets card value from deck array
 function getValue(value){
     var card = value.match('^([^_]+)')
     return card[0]

@@ -8,7 +8,7 @@
     <title>Blackjack</title>
     <link rel="icon" href="">
 </head>
-<body>
+<body onload="newGame();">
     <div class="container">
         <div class="dealer" id="dealerHand">
             <h2>Dealer Hand</h2>
@@ -18,6 +18,7 @@
         </div>
         <div class="bets">
             <h2>Bets</h2>
+            <input type="number" min="0" pattern="[0-9]{10}" value="0.00">Bet Amount</input>
         </div>
         <div class="playerControls">
             <h2>Player Controls</h2>
