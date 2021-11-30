@@ -20,15 +20,15 @@ let startDeck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
 var deck = JSON.parse(JSON.stringify(startDeck))
 
 
-let dealerHand
-let playerHand
+let dealerHand= [0,0]
+let playerHand= [0,0]
 
 
 function fillDeck(){
     deck = JSON.parse(JSON.stringify(startDeck));
 }
 
-function draw(player){
+function draw(player, hand){
     let value = deck.splice(Math.floor(Math.random()*deck.length), 1)
     //console.log(`/assests/${value}.png`)
     //console.log(deck.length)
@@ -51,25 +51,33 @@ function draw(player){
     }
     else if(cardFace === 'ace'){
         cardValue = 11
-        //aceCount++
+        hand[1]++
     }
     else{
         cardValue = parseInt(cardFace)
     }
     //console.log(cardValue)
+    hand[0] += cardValue
 
-
-    return cardValue
+    return hand
     
 }
 
 //start a game
 function newGame(){
+
+    dealerHand = [0,0]
+    playerHand= [0,0]
     //code to append card back goes here
 
-    dealerHand = draw("dealer")
-    playerHand = draw("player")
-    playerHand += draw("player")
+    dealerHand = draw("dealer", dealerHand)
+    playerHand = draw("player", playerHand)
+    playerHand = draw("player", playerHand)
+    if(playerHand[0] == 21){
+        //blackjack
+        stand(dealerHand)
+        console.log("Blackjack! Player wins")
+    }
 }
 
 
@@ -77,15 +85,15 @@ function newGame(){
 function stand(dealerHand){
     
     //code to remove card back goes here
-    while (dealerHand < 16){
-        dealerHand += draw("dealer")
-        if(dealerHand > 21){
-            //acecheck here
+    while (dealerHand[0] < 16){
+        dealerHand = draw("dealer", dealerHand)
+        if(dealerHand[0] > 21){
+            aceValue(dealerHand)
         }
     }
     console.log(dealerHand)
 
-    if(dealerHand > 21 || playerHand > dealerHand){
+    if(dealerHand[0] > 21 || playerHand[0] > dealerHand[0]){
         console.log('Player Wins')
     }
     else{
@@ -98,10 +106,10 @@ function stand(dealerHand){
 
 //adds functionality to buttons
 document.getElementById('draw').addEventListener('click', function(e){
-    playerHand += draw("player")
-    if(playerHand > 21){
-        //acecheck here
-        if(playerHand > 21){
+    playerHand = draw("player", playerHand)
+    if(playerHand[0] > 21){
+        aceValue(playerHand)
+        if(playerHand[0] > 21){
             console.log('Dealer Wins')
         }
     }
@@ -111,12 +119,10 @@ document.getElementById('stand').addEventListener('click', function(e){
 });
 
 
-//protocode
-function aceValue(hand, aceCount){
-
-    while(hand > 21 && aceCount > 0){
-        --aceCount;
-        hand = hand-10;
+function aceValue(hand){
+    while(hand[0] > 21 && hand[1] > 0){
+        --hand[1];
+        hand[0] = hand[0]-10;
         
     }
     return hand
