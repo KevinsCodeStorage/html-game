@@ -94,10 +94,10 @@ function stand(dealerHand){
     console.log(dealerHand)
 
     if(dealerHand[0] > 21 || playerHand[0] > dealerHand[0]){
-        console.log('Player Wins')
+        victor('Player')
     }
     else{
-        console.log('Dealer Wins')
+        victor('Dealer')
     }
 
 
@@ -110,7 +110,7 @@ document.getElementById('draw').addEventListener('click', function(e){
     if(playerHand[0] > 21){
         aceValue(playerHand)
         if(playerHand[0] > 21){
-            console.log('Dealer Wins')
+            victor('Dealer')
         }
     }
 });
@@ -135,3 +135,14 @@ function getValue(value){
     return card[0]
 }
 
+
+function victor(winner){
+    //delay necessary for dealer to draw cards
+    setTimeout(function(){
+        alert(`${winner} won!`);
+        document.getElementById(`dealerHand`).innerHTML = "<h2>Dealer Hand</h2>";
+        document.getElementById(`playerHand`).innerHTML = "<h2>Player Hand</h2>";
+        newGame()
+    }, 50);
+    
+}
