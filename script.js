@@ -1,6 +1,8 @@
-//window.onbeforeunload = function() {
-//    return "Data will be lost if you leave the page, are you sure?";
-//};
+window.onbeforeunload = function() {
+    localStorage.setItem('cash', `${cashAvailable}`);
+    return "Your current bet will be lost if you leave the page, are you sure?";
+    
+};
 
 
 let startDeck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
