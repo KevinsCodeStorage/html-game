@@ -23,6 +23,13 @@ var deck = JSON.parse(JSON.stringify(startDeck))
 let dealerHand= [0,0]
 let playerHand= [0,0]
 
+let betAmount= 0;
+
+//set set to store locally
+let cashAvailable = 1000;
+let shownCash = 1000;
+setAmounts()
+
 
 function fillDeck(){
     deck = JSON.parse(JSON.stringify(startDeck));
@@ -137,12 +144,52 @@ function getValue(value){
 
 
 function victor(winner){
+    vic = winner;
     //delay necessary for dealer to draw cards
     setTimeout(function(){
-        alert(`${winner} won!`);
+        if(vic === 'Player'){
+          alert(`Player won $${betAmount}!`);
+          shownCash += betAmount;
+          cashAvailable = shownCash;  
+        }
+        else{
+            alert(`Player lost $${betAmount}!`);
+          shownCash -= betAmount;
+          cashAvailable = shownCash;  
+        }
+        
         document.getElementById(`dealerHand`).innerHTML = "<h2>Dealer Hand</h2>";
         document.getElementById(`playerHand`).innerHTML = "<h2>Player Hand</h2>";
-        newGame()
+        
+        betAmount = 0
+        setAmounts()
     }, 50);
     
 }
+
+document.getElementById('start').addEventListener('click', function(e){
+    newGame()
+})
+
+
+
+function setAmounts(){
+    document.getElementById('winnings').textContent = `Winnings: $${shownCash}`;
+    document.getElementById('betAmount').textContent = `Amount bet: $${betAmount}`;
+}
+
+//betting code
+document.getElementById('chip1').addEventListener('click', function(e){
+    if(cashAvailable >= 100){
+        cashAvailable -= 100;
+        betAmount += 100;
+    }
+    setAmounts()
+});
+document.getElementById('chip2').addEventListener('click', function(e){
+    if(cashAvailable >= 500){
+        cashAvailable -= 500;
+        betAmount += 500;
+    }
+    setAmounts()
+});

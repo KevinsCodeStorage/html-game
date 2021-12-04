@@ -8,7 +8,7 @@
     <title>Blackjack</title>
     <link rel="icon" href="">
 </head>
-<body onload="newGame();">
+<body>
     <h1>Blackjack</h1>
     <div class="container">
         <div class="dealer" id="dealerHand">
@@ -21,12 +21,14 @@
             <h2>Bets</h2>
             <div id="chip1">Chip Amount 1</div>
             <div id="chip2">Chip Amount 2</div>
+            <button type="button" id="start">Bet</button>
+            <div id="winnings"></div>
+            <div id="betAmount"></div>
         </div>
         <div class="playerControls">
             <h2>Player Controls</h2>
             <button type="button" id="draw">Draw</button>
             <button type="button" id="stand">Stand</button>
-            <button type="button" id="Split">Split</button>
         </div>
       </div>
 </body>
