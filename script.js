@@ -1,5 +1,5 @@
 //window.onbeforeunload = function() {
-//    return "Data will be lost if you leave the page, are you sure?";
+//   return "Data will be lost if you leave the page, are you sure?";
 //};
 
 
@@ -19,6 +19,15 @@ let startDeck = ['2_of_clubs','2_of_diamonds','2_of_hearts','2_of_spades',
 ]
 var deck = JSON.parse(JSON.stringify(startDeck))
 
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
 
 let dealerHand= [0,0]
 let playerHand= [0,0]
@@ -34,6 +43,7 @@ setAmounts()
 function fillDeck(){
     deck = JSON.parse(JSON.stringify(startDeck));
 }
+
 
 function draw(player, hand){
     let value = deck.splice(Math.floor(Math.random()*deck.length), 1)
@@ -143,32 +153,54 @@ function getValue(value){
 }
 
 
+
 function victor(winner){
-    vic = winner;
-    //delay necessary for dealer to draw cards
-    setTimeout(function(){
-        if(vic === 'Player'){
-          alert(`Player won $${betAmount}!`);
+        modal.style.display = "block";
+        if(winner === 'Player'){
+            document.getElementById('modalContent').innerHTML = `Player won $${betAmount}!`;
           shownCash += betAmount;
           cashAvailable = shownCash;  
         }
         else{
-            alert(`Player lost $${betAmount}!`);
+            document.getElementById('modalContent').innerHTML = `Player lost $${betAmount}!`;
           shownCash -= betAmount;
           cashAvailable = shownCash;  
         }
-        
-        document.getElementById(`dealerHand`).innerHTML = "<h2>Dealer Hand</h2>";
-        document.getElementById(`playerHand`).innerHTML = "<h2>Player Hand</h2>";
-        
-        betAmount = 0
-        setAmounts()
-    }, 50);
-    
 }
 
+//executes setGame function when pop-up modal is closed
+span.onclick = function() {
+    setGame()
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        setGame()
+    }
+}      
+    
+    
+
+function setGame(){
+    modal.style.display = "none";
+    document.getElementById(`dealerHand`).innerHTML = "<h2>Dealer Hand</h2>";
+    document.getElementById(`playerHand`).innerHTML = "<h2>Player Hand</h2>";
+        
+    betAmount = 0
+    if(shownCash == 0){
+        modal.style.display = "block";
+        document.getElementById('modalContent').innerHTML ="You are broke, have $100";
+        shownCash =100;
+        cashAvailable = shownCash; 
+    }
+    setAmounts()
+}
+
+
+
 document.getElementById('start').addEventListener('click', function(e){
-    newGame()
+    if(betAmount > 0){
+        newGame()
+    }
 })
 
 
