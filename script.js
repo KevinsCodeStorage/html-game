@@ -80,8 +80,7 @@ function fillDeck() {
 
 function draw(player, hand) {
   let value = deck.splice(Math.floor(Math.random() * deck.length), 1);
-  //console.log(`/assests/${value}.png`)
-  //console.log(deck.length)
+  
 
   var img = document.createElement("img");
   img.src = `assests/${value}.png`;
@@ -91,7 +90,7 @@ function draw(player, hand) {
   document.getElementById(`${player}Hand`).append(img);
 
   let cardFace = getValue(`${value}`);
-  //console.log(cardFace)
+  
 
   let cardValue;
   if (cardFace === "king" || cardFace === "queen" || cardFace === "jack") {
@@ -102,7 +101,6 @@ function draw(player, hand) {
   } else {
     cardValue = parseInt(cardFace);
   }
-  //console.log(cardValue)
   hand[0] += cardValue;
 
   return hand;
@@ -110,7 +108,6 @@ function draw(player, hand) {
 
 //start a game
 function newGame() {
-  //code to append card back goes here
 
   dealerHand = draw("dealer", dealerHand);
   playerHand = draw("player", playerHand);
@@ -118,7 +115,6 @@ function newGame() {
   if (playerHand[0] == 21) {
     //blackjack
     stand(dealerHand);
-    console.log("Blackjack! Player wins");
   }
 }
 
