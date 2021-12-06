@@ -3,8 +3,8 @@ NJIT Milestone Project 1
 
 Blackjack
 
-card assests courtesy of google code archive : https://code.google.com/archive/p/vector-playing-cards/
-poker chips courtesy of OpenGameArt: https://opengameart.org/content/poker-chips-0
+card assests courtesy of google code archive : https://code.google.com/archive/p/vector-playing-cards/  
+poker chips courtesy of OpenGameArt: https://opengameart.org/content/poker-chips-0  
 Fonts are from google fonts
 
 Thanks to W3schools and stackoverflow.com for providing both helpful code snippets, and for providing answers to have ceratin code must be written to execute properly
