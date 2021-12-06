@@ -1,28 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:wght@200&family=Titillium+Web:wght@600&display=swap"
+        rel="stylesheet">
     <title>Blackjack</title>
-    <link rel="icon" href="">
+    <link rel="icon" type="image/x-icon" href="/assests/ace_of_spades2.png">
 </head>
+
 <body>
-    <h1>Blackjack</h1>
+    <header>
+        <h1>Blackjack</h1>
+    </header>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalContent"></p>
+        </div>
+
+    </div>
+
     <div class="container">
         <div class="dealer" id="dealerHand">
             <h2>Dealer Hand</h2>
         </div>
-        <div class="playerHand" id="playerHand">
+        <div class="player" id="playerHand">
             <h2>Player Hand</h2>
         </div>
         <div class="bets">
             <h2>Bets</h2>
-            <div id="chip1">Chip Amount 1</div>
-            <div id="chip2">Chip Amount 2</div>
+            <div class="chip100" id="chip1">
+                <img src="/assests/pokerchip1.png" alt="$100 Red Poker Chip">
+                <div class="centered">$100</div>
+            </div>
+            <div class="chip500" id="chip2">
+                <img src="/assests/pokerchip2.png" alt="$500 Green Poker Chip">
+                <div class="centered">$500</div>
+            </div>
             <button type="button" id="start">Bet</button>
-            <div id="winnings"></div>
+
             <div id="betAmount"></div>
         </div>
         <div class="playerControls">
@@ -30,7 +57,11 @@
             <button type="button" id="draw">Draw</button>
             <button type="button" id="stand">Stand</button>
         </div>
-      </div>
+    </div>
+    <footer>
+        <div id="winnings"></div>
+    </footer>
 </body>
 <script src="script.js"></script>
+
 </html>
