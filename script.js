@@ -84,7 +84,7 @@ function draw(player, hand) {
   //console.log(deck.length)
 
   var img = document.createElement("img");
-  img.src = `assests/${value}.png`;
+  img.src = `assets/${value}.png`;
   img.style.height = "200px";
   img.style.width = "130px";
 
