@@ -1,31 +1,75 @@
-html{
-  background-color: lawngreen;
+body {
+  background-color: blanchedalmond;
 }
 
+* {
+  text-align: center;
+}
+h1,
+h2 {
+  font-family: "Titillium Web", sans-serif;
+}
+button {
+  font-size: 20px;
+}
 
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 40px;
+  font-family: "Spectral", serif;
+}
+
+.chip100,
+.chip500 {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "dealer dealer dealer"
-      "playerHand playerHand playerHand"
-      "bets playerControls playerControls";
-  }
-  
-  .dealer { grid-area: dealer; }
-  
-  .playerHand { grid-area: playerHand; }
-  
-  .bets { grid-area: bets; }
-  
-  .playerControls { grid-area: playerControls; }
-  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "dealer dealer "
+    "player player "
+    "bets playerControls ";
+}
 
-  /* The Modal (background) */
+.dealer {
+  grid-area: dealer;
+  min-height: 300px;
+  border: solid black 2px;
+  background-color: #009900;
+}
+
+.player {
+  grid-area: player;
+  min-height: 300px;
+  border: solid black 2px;
+  background-color: #009900;
+}
+
+.bets {
+  grid-area: bets;
+}
+
+.playerControls {
+  grid-area: playerControls;
+}
+
+/* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -36,8 +80,8 @@ html{
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
