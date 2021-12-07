@@ -19,3 +19,5 @@ If the dealer goes over 21 when you are below it the you win
 If you bet blackjack (21) in you opening hand you automatically win  
 Dealer wins ties in card totals  
 Cards are balued at their face value, Jacks, Queens, and Kings are 10s and Aces can either be 11 or 1  
+
+game URL: https://kevinscodestorage.github.io/html-game/
