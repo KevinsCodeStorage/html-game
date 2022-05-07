@@ -80,7 +80,6 @@ function fillDeck() {
 
 function draw(player, hand) {
   let value = deck.splice(Math.floor(Math.random() * deck.length), 1);
-  
 
   var img = document.createElement("img");
   img.src = `assets/${value}.png`;
@@ -90,7 +89,6 @@ function draw(player, hand) {
   document.getElementById(`${player}Hand`).append(img);
 
   let cardFace = getValue(`${value}`);
-  
 
   let cardValue;
   if (cardFace === "king" || cardFace === "queen" || cardFace === "jack") {
@@ -108,7 +106,6 @@ function draw(player, hand) {
 
 //start a game
 function newGame() {
-
   dealerHand = draw("dealer", dealerHand);
   playerHand = draw("player", playerHand);
   playerHand = draw("player", playerHand);
