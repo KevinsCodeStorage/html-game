@@ -1,0 +1,23 @@
+{
+  "name": "html-game",
+  "version": "1.0.0",
+  "description": "NJIT Milestone Project 1",
+  "main": "index.js",
+  "dependencies": {
+    "typescript": "^4.6.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "npx tsc"
+  },                              
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinsCodeStorage/html-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinsCodeStorage/html-game/issues"
+  },
+  "homepage": "https://github.com/KevinsCodeStorage/html-game#readme"
+}

@@ -61,16 +61,16 @@ var deck = JSON.parse(JSON.stringify(startDeck));
 let dealerHand = [0, 0];
 let playerHand = [0, 0];
 
-let betAmount = 0;
-let cashAvailable;
-let shownCash;
+let betAmount: number = 0;
+let cashAvailable: number;
+let shownCash: number;
 
 if (localStorage.getItem("reserves") === null) {
   cashAvailable = 1000;
   shownCash = 1000;
 } else {
-  cashAvailable = parseInt(localStorage.getItem("reserves"));
-  shownCash = parseInt(localStorage.getItem("reserves"));
+  cashAvailable = parseInt(localStorage.getItem("reserves") || "");
+  shownCash = parseInt(localStorage.getItem("reserves") || "");
 }
 setAmounts();
 
@@ -78,7 +78,7 @@ function fillDeck() {
   deck = JSON.parse(JSON.stringify(startDeck));
 }
 
-function draw(player, hand) {
+function draw(player: string, hand: any) {
   let value = deck.splice(Math.floor(Math.random() * deck.length), 1);
 
   var img = document.createElement("img");
@@ -86,8 +86,11 @@ function draw(player, hand) {
   img.style.height = "200px";
   img.style.width = "130px";
 
-  document.getElementById(`${player}Hand`).append(img);
-
+  let handImg = document.getElementById(`${player}Hand`);
+  if (handImg) (handImg as HTMLFormElement).reset();
+  if (handImg !== null) {
+    handImg.append(img);
+  }
   let cardFace = getValue(`${value}`);
 
   let cardValue;
@@ -115,7 +118,7 @@ function newGame() {
   }
 }
 
-function stand(dealerHand) {
+function stand(dealerHand: any) {
   //code to remove card back goes here
   while (dealerHand[0] < 16) {
     dealerHand = draw("dealer", dealerHand);
@@ -133,20 +136,28 @@ function stand(dealerHand) {
 }
 
 //adds functionality to buttons
-document.getElementById("draw").addEventListener("click", function (e) {
-  playerHand = draw("player", playerHand);
-  if (playerHand[0] > 21) {
-    aceValue(playerHand);
+let drawThing = document.getElementById("draw");
+if (drawThing) (drawThing as HTMLFormElement).reset();
+if (drawThing !== null) {
+  drawThing.addEventListener("click", function (e) {
+    playerHand = draw("player", playerHand);
     if (playerHand[0] > 21) {
-      victor("Dealer");
+      aceValue(playerHand);
+      if (playerHand[0] > 21) {
+        victor("Dealer");
+      }
     }
-  }
-});
-document.getElementById("stand").addEventListener("click", function (e) {
-  stand(dealerHand);
-});
+  });
+}
+let standThing = document.getElementById("stand");
+if (standThing) (standThing as HTMLFormElement).reset();
+if (standThing !== null) {
+  standThing.addEventListener("click", function (e) {
+    stand(dealerHand);
+  });
+}
 
-function aceValue(hand) {
+function aceValue(hand: any) {
   while (hand[0] > 21 && hand[1] > 0) {
     --hand[1];
     hand[0] = hand[0] - 10;
@@ -155,36 +166,41 @@ function aceValue(hand) {
 }
 
 //gets card value from deck array
-function getValue(value) {
+function getValue(value: any) {
   var card = value.match("^([^_]+)");
   return card[0];
 }
 
-function victor(winner) {
-  modal.style.display = "block";
+function victor(winner: any) {
+  if (modal !== null) {
+    modal.style.display = "block";
+  }
   if (winner === "Player") {
-    document.getElementById(
-      "modalContent"
-    ).innerHTML = `Player won $${betAmount}!`;
+    let modalWin = document.getElementById("modalContent");
+    if (modalWin) (modalWin as HTMLFormElement).reset();
+    if (modalWin !== null) {
+      modalWin.innerHTML = `Player won $${betAmount}!`;
+    }
     shownCash += betAmount;
     cashAvailable = shownCash;
   } else {
-    document.getElementById(
-      "modalContent"
-    ).innerHTML = `Player lost $${betAmount}!`;
+    let modalLoss = document.getElementById("modalContent");
+    if (modalLoss !== null) {
+      modalLoss.innerHTML = `Player lost $${betAmount}!`;
+    }
     shownCash -= betAmount;
     cashAvailable = shownCash;
   }
 }
 
 // Get the modal
-var modal = document.getElementById("myModal");
+var modal: any = document.getElementById("myModal");
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span: any = document.getElementsByClassName("close")[0];
 
 //executes setGame function when pop-up modal is closed
 span.onclick = function () {
@@ -198,14 +214,17 @@ window.onclick = function (event) {
 
 function setGame() {
   modal.style.display = "none";
-  document.getElementById(`dealerHand`).innerHTML = "<h2>Dealer Hand</h2>";
-  document.getElementById(`playerHand`).innerHTML = "<h2>Player Hand</h2>";
+  let dealHand = document.getElementById(`dealerHand`);
+  if (dealHand !== null) dealHand.innerHTML = "<h2>Dealer Hand</h2>";
+
+  let playHand = document.getElementById(`playerHand`);
+  if (playHand !== null) playHand.innerHTML = "<h2>Player Hand</h2>";
 
   betAmount = 0;
   if (shownCash == 0) {
     modal.style.display = "block";
-    document.getElementById("modalContent").innerHTML =
-      "You are broke, have $100";
+    let modalBroke = document.getElementById("modalContent");
+    if (modalBroke !== null) modalBroke.innerHTML = "You are broke, have $100";
     shownCash = 100;
     cashAvailable = shownCash;
   }
@@ -215,31 +234,40 @@ function setGame() {
   playerHand = [0, 0];
 }
 
-document.getElementById("start").addEventListener("click", function (e) {
-  if (betAmount > 0 && playerHand[0] == 0) {
-    newGame();
-  }
-});
-
+let startButton = document.getElementById("start");
+if (startButton !== null) {
+  startButton.addEventListener("click", function (e) {
+    if (betAmount > 0 && playerHand[0] == 0) {
+      newGame();
+    }
+  });
+}
 function setAmounts() {
-  document.getElementById("winnings").textContent = `Your Cash: $${shownCash}`;
-  document.getElementById(
-    "betAmount"
-  ).textContent = `Amount bet: $${betAmount}`;
+  let winnings = document.getElementById("winnings");
+  if (winnings !== null) winnings.textContent = `Your Cash: $${shownCash}`;
+  let betAmountShown = document.getElementById("betAmount");
+  if (betAmountShown !== null)
+    betAmountShown.textContent = `Amount bet: $${betAmount}`;
 }
 
 //betting code
-document.getElementById("chip1").addEventListener("click", function (e) {
-  if (cashAvailable >= 100 && playerHand[0] == 0) {
-    cashAvailable -= 100;
-    betAmount += 100;
-  }
-  setAmounts();
-});
-document.getElementById("chip2").addEventListener("click", function (e) {
-  if (cashAvailable >= 500 && playerHand[0] == 0) {
-    cashAvailable -= 500;
-    betAmount += 500;
-  }
-  setAmounts();
-});
+let chipOne = document.getElementById("chip1");
+if (chipOne !== null) {
+  chipOne.addEventListener("click", function (e) {
+    if (cashAvailable >= 100 && playerHand[0] == 0) {
+      cashAvailable -= 100;
+      betAmount += 100;
+    }
+    setAmounts();
+  });
+}
+let chipTwo = document.getElementById("chip2");
+if (chipTwo !== null) {
+  chipTwo.addEventListener("click", function (e) {
+    if (cashAvailable >= 500 && playerHand[0] == 0) {
+      cashAvailable -= 500;
+      betAmount += 500;
+    }
+    setAmounts();
+  });
+}
