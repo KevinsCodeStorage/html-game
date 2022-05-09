@@ -5,10 +5,12 @@ body {
 * {
   text-align: center;
 }
+
 h1,
 h2 {
   font-family: "Titillium Web", sans-serif;
 }
+
 button {
   font-size: 20px;
 }
@@ -28,26 +30,31 @@ footer {
   text-align: center;
   color: white;
 }
+
 .centered {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .container {
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
-  grid-template-areas:
-    "dealer dealer "
-    "player player "
-    "bets playerControls ";
+      grid-template-areas: "dealer dealer " "player player " "bets playerControls ";
 }
 
 .dealer {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
   grid-area: dealer;
   min-height: 300px;
   border: solid black 2px;
@@ -55,6 +62,9 @@ footer {
 }
 
 .player {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
   grid-area: player;
   min-height: 300px;
   border: solid black 2px;
@@ -62,29 +72,41 @@ footer {
 }
 
 .bets {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
   grid-area: bets;
 }
 
 .playerControls {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
   grid-area: playerControls;
 }
 
-/* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  /* Modal Content */
 }
 
-/* Modal Content */
 .modal-content {
   background-color: #fefefe;
   margin: auto;
@@ -101,9 +123,9 @@ footer {
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,109 @@
+body {
+  background-color: blanchedalmond;
+}
+
+* {
+  text-align: center;
+}
+h1,
+h2 {
+  font-family: "Titillium Web", sans-serif;
+}
+button {
+  font-size: 20px;
+}
+
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 40px;
+  font-family: "Spectral", serif;
+}
+
+.chip100,
+.chip500 {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "dealer dealer "
+    "player player "
+    "bets playerControls ";
+}
+
+@mixin hand($hand: dealer) {
+  grid-area: $hand;
+  min-height: 300px;
+  border: solid black 2px;
+  background-color: #009900;
+}
+
+.dealer {
+  @include hand;
+}
+
+.player {
+  @include hand($hand: player);
+}
+
+.bets {
+  grid-area: bets;
+}
+
+.playerControls {
+  grid-area: playerControls;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+
+  /* Modal Content */
+  &-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+
+  &:hover,
+  &:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
